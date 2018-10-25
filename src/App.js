@@ -16,7 +16,7 @@ class App extends Component {
 
   componentDidMount() {
 
-      fetch('http://localhost:4000/api/books/tweetsuser/' + 'ShannonBeador') 
+      fetch('http://localhost:4000/api/books/tweetsuser/' + ) 
         .then(res => 
           res.json()
         ).then(arts => {
