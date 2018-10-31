@@ -6,6 +6,7 @@ import Child from './components/Child'
 import Home from './components/Home'
 import OgCt from './components/OgCt'
 import Ny from './components/Ny'
+import FranWrap from './components/FranWrap'
 
 class App extends Component {
   
@@ -25,15 +26,13 @@ class App extends Component {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/oc">Orange County</Link>
+                <Link to="/cities">Cities</Link>
               </li>
-              <li>
-                <Link to="/ny">NY</Link>
-              </li>
+              
             </ul>          
             <Route exact path="/" component={Home} />
-            <Route path="/oc" component={OgCt} />
-            <Route path="/ny" component={Ny} />
+            <Route exact path="/cities" render={(props) => <FranWrap {...props} moyrsn='' twSn='' selCat='' />}  />
+            
           </div>                
         </Router>
       </div>
@@ -43,4 +42,7 @@ class App extends Component {
   }
 }
 
+  
 export default App;
+
+      
