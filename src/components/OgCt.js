@@ -10,13 +10,18 @@ class OgCt extends Component {
     this.state = {
       moyrsn: '',     
       twSn: '',
+      selCast: '',
       showTweets:{},
+      displaySummary: 'none',
+      displayDetail: 'inline-block',
+      displayType: 'detail',
       stopWords: ['—','i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don','should','now'] 
 
     }
 
     this.handleClick = this.handleClick.bind(this)
     this.handleTweetShow = this.handleTweetShow.bind(this)
+    this.handleViewClick = this.handleViewClick.bind(this)
   }
 
   componentDidMount() {
@@ -122,7 +127,8 @@ class OgCt extends Component {
 
           this.setState({
             moyrsn: ctwt, 
-            twSn: sort_sn
+            twSn: sort_sn, 
+            selCast: 'ShannonBeador'
           })          
         })                
 
@@ -235,7 +241,11 @@ class OgCt extends Component {
 
           this.setState({
             moyrsn: ctwt, 
-            twSn: sort_sn
+            twSn: sort_sn, 
+            selCast: textClick, 
+            displaySummary: 'none', 
+	        displayDetail: 'inline-block', 
+	        displayType: 'detail'
           })          
         })             
 
@@ -256,6 +266,20 @@ class OgCt extends Component {
     }) 
   }
 
+  handleViewClick() {
+  	this.state.displayDetail == 'inline-block' && this.state.displaySummary == 'none' ? 
+  		this.setState({
+  			displayDetail: 'none', 
+  			displaySummary: 'inline-block',
+  			displayType: 'summary'
+  		}) : 
+  			this.setState({
+  			displayDetail: 'inline-block', 
+  			displaySummary: 'none', 
+  			displayType: 'detail'
+  		}) 
+  }
+
   render() {
     
     console.log('this.state.moyrsn', this.state.moyrsn)
@@ -271,10 +295,14 @@ class OgCt extends Component {
     const oc_memb = ['tamrabarney', 'bravorhoc', 'rhoc_kellydodd', 'shannonbeador','vgunvalson','realocemily','gkirschenheiter']                            
 
     const ny_memb = ['caroleradziwill', 'ramonasinger', 'dorindamedley', 'bethenny', 'countessluann','sonjatmorgan', 'tinsleymortimer']                        
+    
     const twMoYrSn = Object.keys(this.state.moyrsn).map((key,index) => 
         <tr className={oc_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'orangeLink' : 
                 ny_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'redLink' : 
-                'blueLink'}>
+                (this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'andy' || 
+                	this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravoandy' || 
+                	this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravotv' || 
+                	this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravowwhl') ? 'purpleLink' : 'blueLink'}>
           <td>{monthNames[this.state.moyrsn[key]['mo-yr'].split('-')[0]]}</td>
           <td>{this.state.moyrsn[key]['mo-yr'].split('-')[1]}</td>
           <td className='handleLink'><a href={"https://twitter.com/" + this.state.moyrsn[key]['mo-yr'].split('-')[2]} >{this.state.moyrsn[key]['mo-yr'].split('-')[2]}</a></td>
@@ -289,7 +317,12 @@ class OgCt extends Component {
 
     const tsSnTab = Object.keys(twtSn).map(key => 
         <tr className={oc_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'orangeLink' : 
-                            ny_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'redLink' : 'blueLink'}>
+                            ny_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'redLink' : 
+                            (twtSn[key]['screen_name'].toLowerCase()  == 'andy' ||
+                            twtSn[key]['screen_name'].toLowerCase()  == 'bravoandy' ||
+                            twtSn[key]['screen_name'].toLowerCase()  == 'bravotv' ||
+							twtSn[key]['screen_name'].toLowerCase()  == 'bravowwhl')
+                             ? 'purpleLink' : 'blueLink'}>
           <td ><a  href={"https://twitter.com/" + twtSn[key]['screen_name']} >{twtSn[key]['screen_name']}</a></td>
           
             <td onClick={this.handleTweetShow} id={key}>{twtSn[key]['count']}</td>
@@ -309,9 +342,14 @@ class OgCt extends Component {
          <div onClick={this.handleClick} id="shannonbeador">Shannon</div>
 
            
+         <h3>{this.state.selCast}</h3>
+         <ul>
+         	<li style={{fontWeight: this.state.displayType == 'detail' ? 'bold' : 'normal' }} onClick={this.handleViewClick}>Monthly</li>
+         	<li style={{fontWeight: this.state.displayType == 'summary' ? 'bold' : 'normal' }} onClick={this.handleViewClick}>Summary</li>
+         </ul>
+
          
-         
-          <table>
+          <table style={{display : this.state.displayDetail}}>
             <tr>
               <th>Month</th>
               <th>Year</th>
@@ -321,7 +359,7 @@ class OgCt extends Component {
               {twMoYrSn}
           </table>
 
-          <table>
+          <table style={{display : this.state.displaySummary}} >
             <tr>              
               <th>Screen Name</th>
               <th># Mentions</th>

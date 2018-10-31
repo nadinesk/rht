@@ -32,17 +32,23 @@
 }
 
 
-.orangeLink, .orangeLink a:visited {
+.orangeLink, .orangeLink a:visited,  .orangeLink a{
   color: orange;
   font-size:110%;
 }
 
 
 
-.redLink, .redLink a:visited {
+.redLink, .redLink a:visited, .redLink a {
   color: red;
   font-size:110%;
 }
+
+.purpleLink, .purpleLink a:visited, .purpleLink a {
+  color: purple;
+  font-size:110%;
+}
+
 
 .blueLink {
   color: blue;
