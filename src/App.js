@@ -263,7 +263,7 @@ class App extends Component {
     console.log('this.state.moyrsn', this.state.moyrsn)
     console.log('this.state.sort_sn', this.state.twSn)
     console.log('this.state.showTweets', this.state.showTweets)
-    debugger
+    
 
     const twtSn = this.state.twSn
     
@@ -274,25 +274,25 @@ class App extends Component {
 
     const ny_memb = ['caroleradziwill', 'ramonasinger', 'dorindamedley', 'bethenny', 'countessluann','sonjatmorgan', 'tinsleymortimer']                        
     const twMoYrSn = Object.keys(this.state.moyrsn).map((key,index) => 
-        <tr style={{color: oc_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'orange' : 
-                ny_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'red' : 
-                'blue'}}>
+        <tr className={oc_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'orangeLink' : 
+                ny_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'redLink' : 
+                'blueLink'}>
           <td>{monthNames[this.state.moyrsn[key]['mo-yr'].split('-')[0]]}</td>
           <td>{this.state.moyrsn[key]['mo-yr'].split('-')[1]}</td>
-          <td><a href={"https://twitter.com/" + this.state.moyrsn[key]['mo-yr'].split('-')[2]} >{this.state.moyrsn[key]['mo-yr'].split('-')[2]}</a></td>
+          <td className='handleLink'><a href={"https://twitter.com/" + this.state.moyrsn[key]['mo-yr'].split('-')[2]} >{this.state.moyrsn[key]['mo-yr'].split('-')[2]}</a></td>
           
-            <div>
+            
               <td onClick={this.handleTweetShow} id={key}>{this.state.moyrsn[key]['count']}</td>    
               {this.state.showTweets[key] ? <Child tweetText={this.state.moyrsn[key]}/> : null}
-            </div>
+            
           
         </tr>
       )
 
     const tsSnTab = Object.keys(twtSn).map(key => 
-        <tr style={{color:  oc_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'orange' : 
-                            ny_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'red' : 'blue'}}>
-          <td><a href={"https://twitter.com/" + twtSn[key]['screen_name']} >{twtSn[key]['screen_name']}</a></td>
+        <tr className={oc_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'orangeLink' : 
+                            ny_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'redLink' : 'blueLink'}>
+          <td ><a  href={"https://twitter.com/" + twtSn[key]['screen_name']} >{twtSn[key]['screen_name']}</a></td>
           
             <td onClick={this.handleTweetShow} id={key}>{twtSn[key]['count']}</td>
             {this.state.showTweets[key] ? <Child tweetText={twtSn[key]}/> : null}

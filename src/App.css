@@ -30,3 +30,20 @@
     transform: rotate(360deg);
   }
 }
+
+
+.orangeLink, .orangeLink a:visited {
+  color: orange;
+  font-size:110%;
+}
+
+
+
+.redLink, .redLink a:visited {
+  color: red;
+  font-size:110%;
+}
+
+.blueLink {
+  color: blue;
+}
