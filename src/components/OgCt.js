@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
-import Child from './components/Child'
-import Home from './components/Home'
-import OgCt from './components/OgCt'
-import Ny from './components/Ny'
+import Child from './Child'
 
-class App extends Component {
-  
-  constructor(props) {
+
+class OgCt extends Component {
+
+ constructor(props) {
     super(props); 
 
     this.state = {
@@ -305,25 +300,38 @@ class App extends Component {
     return (
       
       <div >
-        some kind of header
-        <Router>
-          <div>
-            <ul>              
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/oc">Orange County</Link>
-              </li>
-              <li>
-                <Link to="/ny">NY</Link>
-              </li>
-            </ul>          
-            <Route exact path="/" component={Home} />
-            <Route path="/oc" component={OgCt} />
-            <Route path="/ny" component={Ny} />
-          </div>                
-        </Router>
+         <h3>RHOC</h3>
+         <div onClick={this.handleClick} id="vgunvalson">Vicki</div>
+         <div onClick={this.handleClick} id="tamrabarney">Tamra</div>
+         <div onClick={this.handleClick} id="rhoc_kellydodd">Kelly</div>
+         <div onClick={this.handleClick} id="realocemily">Emily</div>
+         <div onClick={this.handleClick} id="gkirschenheiter">Gina</div>
+         <div onClick={this.handleClick} id="shannonbeador">Shannon</div>
+
+           
+         
+         
+          <table>
+            <tr>
+              <th>Month</th>
+              <th>Year</th>
+              <th>Screen Name</th>
+              <th># Mentions</th>
+            </tr>
+              {twMoYrSn}
+          </table>
+
+          <table>
+            <tr>              
+              <th>Screen Name</th>
+              <th># Mentions</th>
+            </tr>
+              {tsSnTab}
+          </table>
+
+
+        
+        
       </div>
     
     );
@@ -331,4 +339,5 @@ class App extends Component {
   }
 }
 
-export default App;
+
+export default OgCt;

@@ -3,9 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 import Child from './components/Child'
-import Home from './components/Home'
-import OgCt from './components/OgCt'
-import Ny from './components/Ny'
 
 class App extends Component {
   
@@ -305,25 +302,45 @@ class App extends Component {
     return (
       
       <div >
-        some kind of header
-        <Router>
-          <div>
-            <ul>              
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/oc">Orange County</Link>
-              </li>
-              <li>
-                <Link to="/ny">NY</Link>
-              </li>
-            </ul>          
-            <Route exact path="/" component={Home} />
-            <Route path="/oc" component={OgCt} />
-            <Route path="/ny" component={Ny} />
-          </div>                
-        </Router>
+         <h3>RHOC</h3>
+         <div onClick={this.handleClick} id="vgunvalson">Vicki</div>
+         <div onClick={this.handleClick} id="tamrabarney">Tamra</div>
+         <div onClick={this.handleClick} id="rhoc_kellydodd">Kelly</div>
+         <div onClick={this.handleClick} id="realocemily">Emily</div>
+         <div onClick={this.handleClick} id="gkirschenheiter">Gina</div>
+         <div onClick={this.handleClick} id="shannonbeador">Shannon</div>
+
+           <h3>RHONY</h3>
+         <div onClick={this.handleClick} id="caroleradziwill">Carole</div>
+         <div onClick={this.handleClick} id="ramonasinger">Ramona</div>
+         <div onClick={this.handleClick} id="dorindamedley">Dorinda</div>
+         <div onClick={this.handleClick} id="bethenny">Bethenny</div>
+         <div onClick={this.handleClick} id="sonjatmorgan">Sonja</div>
+         <div onClick={this.handleClick} id="countessluann">Luann</div>
+         <div onClick={this.handleClick} id="tinsleymortimer">Tinsley</div>
+         
+         
+          <table>
+            <tr>
+              <th>Month</th>
+              <th>Year</th>
+              <th>Screen Name</th>
+              <th># Mentions</th>
+            </tr>
+              {twMoYrSn}
+          </table>
+
+          <table>
+            <tr>              
+              <th>Screen Name</th>
+              <th># Mentions</th>
+            </tr>
+              {tsSnTab}
+          </table>
+
+
+        
+        
       </div>
     
     );
