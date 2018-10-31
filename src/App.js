@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
 
-      fetch('http://localhost:4000/api/books/tweetsuser/' + 'ShannonBeador') 
+      fetch('https://dark-vampire-43534.herokuapp.com/api/tweets/tweetsuser/' + 'ShannonBeador') 
         .then(res => 
           res.json()
         ).then(arts => {
@@ -135,7 +135,7 @@ class App extends Component {
      
      const textClick = event.target.id 
 
-     fetch('http://localhost:4000/api/books/tweetsuser/' + textClick) 
+     fetch('https://dark-vampire-43534.herokuapp.com/api/tweets/tweetsuser/' + textClick) 
         .then(res => 
           res.json()
         ).then(arts => {
