@@ -26,12 +26,16 @@ class App extends Component {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/cities">Cities</Link>
+                <Link to="/oc">Oc</Link>
+              </li>
+              <li>
+                <Link to="/ny">NY</Link>
               </li>
               
             </ul>          
             <Route exact path="/" component={Home} />
-            <Route exact path="/cities" render={(props) => <FranWrap {...props} moyrsn='' twSn='' selCat='' />}  />
+            <Route exact path="/oc" component={OgCt} />
+            <Route exact path="/ny" component={Ny} />
             
           </div>                
         </Router>
