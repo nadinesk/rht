@@ -262,10 +262,10 @@ class FranWrap extends Component {
               </Navbar.Header>
               <Nav>
                   <NavItem>
-                    <Link onClick={this.firstLoad} id='oc' className={this.state.selCity=='ocSel' ? 'selCity' : ''} to="/oc">Orange County</Link>
+                    <Link onClick={this.firstLoad} id='oc' className={this.state.selCity=='ocSel' ? 'ocSel' : 'oSel'} to="/oc">Orange County</Link>
                   </NavItem>
                   <NavItem>
-                    <Link onClick={this.firstLoad} id='ny'  className={this.state.selCity=='nySel' ? 'selCity' : ''}  to="/ny">NY</Link>
+                    <Link onClick={this.firstLoad} id='ny'  className={this.state.selCity=='nySel' ? 'nySel' : 'oSel'}  to="/ny">NY</Link>
                   </NavItem>
 
                 </Nav>

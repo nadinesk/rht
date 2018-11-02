@@ -54,7 +54,33 @@
   color: blue;
 }
 
-.selCity {
+.nySel, .nySel a:active, .nySel a:hover, .nySel a:link, .nySel a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.ocSel {
   font-weight: bold;
 }
+
+.oSel, .oSel a:active, .oSel a:hover, .oSel a:link, .oSel a {
+  text-decoration: none;
+}
+
+#ny a:hover, #oc a:hover {
+  text-decoration: none
+
+}
+
+#ny {
+  color: red;
+}
+
+#oc {
+  color: orange;
+}
+
+
+
+
 
