@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Child from './Child'
 import OgCt from './OgCt'
 import Ny from './Ny'
+import Home from './Home'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 
 class FranWrap extends Component {
@@ -18,6 +20,7 @@ class FranWrap extends Component {
       displaySummary: 'none',
       displayDetail: 'inline-block',
       displayType: '',      
+      selCity:'',
       stopWords: ['—','i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don','should','now'] 
 
     }
@@ -139,8 +142,8 @@ class FranWrap extends Component {
             twSn: sort_sn, 
             selCast: textClick, 
             displaySummary: 'none', 
-	        displayDetail: 'inline-block', 
-	        displayType: 'detail'
+          displayDetail: 'inline-block', 
+          displayType: 'detail'
           })          
         })             
 
@@ -162,29 +165,30 @@ class FranWrap extends Component {
   }
 
   handleViewClick() {
-  	
+    
     this.state.displayDetail == 'inline-block' && this.state.displaySummary == 'none' ? 
-  		this.setState({
-  			displayDetail: 'none', 
-  			displaySummary: 'inline-block',
-  			displayType: 'summary'
-  		}) : 
-  			this.setState({
-  			displayDetail: 'inline-block', 
-  			displaySummary: 'none', 
-  			displayType: 'detail'
-  		}) 
+      this.setState({
+        displayDetail: 'none', 
+        displaySummary: 'inline-block',
+        displayType: 'summary'
+      }) : 
+        this.setState({
+        displayDetail: 'inline-block', 
+        displaySummary: 'none', 
+        displayType: 'detail'
+      }) 
   }
 
   firstLoad(event) {
     
-
+      const sc = event.target.id=='oc' ? 'ocSel' : event.target.id=='ny' ? 'nySel' : ''
 
           this.setState({
             moyrsn: '', 
             twSn: '',
             selCast: '',
-            displayType:''
+            displayType:'', 
+            selCity: sc
           })          
        
   }
@@ -213,9 +217,9 @@ class FranWrap extends Component {
         <tr className={oc_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'orangeLink' : 
                 ny_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'redLink' : 
                 (this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'andy' || 
-                	this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravoandy' || 
-                	this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravotv' || 
-                	this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravowwhl') ? 'purpleLink' : 'blueLink'}>
+                  this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravoandy' || 
+                  this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravotv' || 
+                  this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravowwhl') ? 'purpleLink' : 'blueLink'}>
           <td>{monthNames[this.state.moyrsn[key]['mo-yr'].split('-')[0]]}</td>
           <td>{this.state.moyrsn[key]['mo-yr'].split('-')[1]}</td>
           <td className='handleLink'><a href={"https://twitter.com/" + this.state.moyrsn[key]['mo-yr'].split('-')[2]} >{this.state.moyrsn[key]['mo-yr'].split('-')[2]}</a></td>
@@ -235,7 +239,7 @@ class FranWrap extends Component {
                             (twtSn[key]['screen_name'].toLowerCase()  == 'andy' ||
                             twtSn[key]['screen_name'].toLowerCase()  == 'bravoandy' ||
                             twtSn[key]['screen_name'].toLowerCase()  == 'bravotv' ||
-							twtSn[key]['screen_name'].toLowerCase()  == 'bravowwhl')
+              twtSn[key]['screen_name'].toLowerCase()  == 'bravowwhl')
                              ? 'purpleLink' : 'blueLink'}>
           <td ><a  href={"https://twitter.com/" + twtSn[key]['screen_name']} >{twtSn[key]['screen_name']}</a></td>
           
@@ -246,43 +250,50 @@ class FranWrap extends Component {
 
     return (
       
-      <div >
+      
 
            <Router>
-          <div>
-              <ul>                            
-                <li>
-                  <Link onClick={this.firstLoad} id='oc' to="/oc">Orange County</Link>
-                </li>
-                <li>
-                  <Link onClick={this.firstLoad} to="/ny">NY</Link>
-                </li>
-              </ul>                      
-            <Route path="/oc" render={(props) => <OgCt {...props}  handleClick={this.handleClick} 
-            displayDetail={this.state.displayDetail} 
-            displaySummary={this.state.displaySummary} 
-            handleViewClick={this.handleViewClick} 
-            handleTweetShow={this.handleTweetShow}
-            twMoYrSn={twMoYrSn}
-            tsSnTab={tsSnTab}
-            selCast={this.state.selCast}
-            displayType={this.state.displayType} />} />
+           <div>
+            <Navbar>
+              <Navbar.Header>
+                <Navbar.Brand>
+                  <Link to="/">Home</Link>
+                </Navbar.Brand>
+              </Navbar.Header>
+              <Nav>
+                  <NavItem>
+                    <Link onClick={this.firstLoad} id='oc' className={this.state.selCity=='ocSel' ? 'selCity' : ''} to="/oc">Orange County</Link>
+                  </NavItem>
+                  <NavItem>
+                    <Link onClick={this.firstLoad} id='ny'  className={this.state.selCity=='nySel' ? 'selCity' : ''}  to="/ny">NY</Link>
+                  </NavItem>
 
-            <Route path="/ny" render={(props) => <Ny {...props}  handleClick={this.handleClick} 
-            displayDetail={this.state.displayDetail} 
-            displaySummary={this.state.displaySummary} 
-            handleViewClick={this.handleViewClick} 
-            handleTweetShow={this.handleTweetShow}
-            twMoYrSn={twMoYrSn}
-            tsSnTab={tsSnTab}
-            selCast={this.state.selCast}
-            displayType={this.state.displayType} />} />
-            
-          </div>
-        
+                </Nav>
+            </Navbar>
+              <Route exact path="/" component={Home}/>
+              <Route  path="/oc" render={(props) => <OgCt {...props}  handleClick={this.handleClick} 
+              displayDetail={this.state.displayDetail} 
+              displaySummary={this.state.displaySummary} 
+              handleViewClick={this.handleViewClick} 
+              handleTweetShow={this.handleTweetShow}
+              twMoYrSn={twMoYrSn}
+              tsSnTab={tsSnTab}
+              selCast={this.state.selCast}
+              displayType={this.state.displayType} />} />
+
+              <Route  path="/ny" render={(props) => <Ny {...props}  handleClick={this.handleClick} 
+              displayDetail={this.state.displayDetail} 
+              displaySummary={this.state.displaySummary} 
+              handleViewClick={this.handleViewClick} 
+              handleTweetShow={this.handleTweetShow}
+              twMoYrSn={twMoYrSn}
+              tsSnTab={tsSnTab}
+              selCast={this.state.selCast}
+              displayType={this.state.displayType} />} />
+            </div>
         </Router>
         
-        </div>
+
     
     );
   

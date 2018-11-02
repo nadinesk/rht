@@ -7,6 +7,7 @@ import Home from './components/Home'
 import OgCt from './components/OgCt'
 import Ny from './components/Ny'
 import FranWrap from './components/FranWrap'
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 class App extends Component {
   
@@ -17,29 +18,11 @@ class App extends Component {
 
     return (
       
-      <div >
-        some kind of header
-        <Router>
-          <div>
-            <ul>              
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/oc">Oc</Link>
-              </li>
-              <li>
-                <Link to="/ny">NY</Link>
-              </li>
-              
-            </ul>          
-            <Route exact path="/" component={Home} />
-            <Route exact path="/oc" component={OgCt} />
-            <Route exact path="/ny" component={Ny} />
-            
-          </div>                
-        </Router>
-      </div>
+        <div>
+          <FranWrap  moyrsn='' twSn='' selCat='' />                      
+        </div>
+        
+    
     
     );
   
@@ -49,4 +32,3 @@ class App extends Component {
   
 export default App;
 
-      

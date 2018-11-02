@@ -20,8 +20,8 @@ componentWillReceiveProps(nextProps) {
     	
 		return (		
      <div>
-      
-           <div>Home Page</div>
+      asdfasdfasfasdf
+           
     </div>
     
   	)
