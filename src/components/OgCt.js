@@ -42,12 +42,14 @@ class OgCt extends Component {
             <NavItem id={this.props.displayType=="detail" ? "detailSelect" : "otherDetail"} style={{fontWeight: this.props.displayType == 'detail' ? 'bold' : 'normal' , display:this.props.displayType == '' ? 'none' : 'inline-block'}} onClick={this.props.handleViewClick}>Monthly</NavItem>
             <NavItem id={this.props.displayType=="summary" ? "detailSelect" : "otherDetail"} style={{fontWeight: this.props.displayType == 'summary' ? 'bold' : 'normal', display:this.props.displayType == '' ? 'none' : 'inline-block' }} onClick={this.props.handleViewClick}>Summary</NavItem>
            </Nav>
-          
-          <Table style={{display : this.props.displayDetail}}>
-             {tableHeaders}
-              {this.props.twMoYrSn}
-          </Table>
-
+          <Row>
+            
+              <Table style={{display : this.props.displayDetail}} className='tabDetail'>
+                 {tableHeaders}
+                  {this.props.twMoYrSn}
+              </Table>
+            
+          </Row>
           <Table style={{display : this.props.displaySummary}} >
             <tr>              
               <th>Screen Name</th>
