@@ -4,7 +4,7 @@ import OgCt from './OgCt'
 import Ny from './Ny'
 import Home from './Home'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Navbar, Nav, NavItem, Table} from 'react-bootstrap'
 
 
 class FranWrap extends Component {
@@ -142,8 +142,8 @@ class FranWrap extends Component {
             twSn: sort_sn, 
             selCast: textClick, 
             displaySummary: 'none', 
-          displayDetail: 'inline-block', 
-          displayType: 'detail'
+            displayDetail: 'inline-block', 
+            displayType: 'detail'
           })          
         })             
 
@@ -213,39 +213,38 @@ class FranWrap extends Component {
 
     const twMoYrSn = Object.keys(this.state.moyrsn).map((key,index) => 
       
-        
-        <tr className={oc_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'orangeLink' : 
-                ny_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'redLink' : 
-                (this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'andy' || 
-                  this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravoandy' || 
-                  this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravotv' || 
-                  this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravowwhl') ? 'purpleLink' : 'blueLink'}>
-          <td>{monthNames[this.state.moyrsn[key]['mo-yr'].split('-')[0]]}</td>
-          <td>{this.state.moyrsn[key]['mo-yr'].split('-')[1]}</td>
-          <td className='handleLink'><a href={"https://twitter.com/" + this.state.moyrsn[key]['mo-yr'].split('-')[2]} >{this.state.moyrsn[key]['mo-yr'].split('-')[2]}</a></td>
-          
-            
-              <td onClick={this.handleTweetShow} id={key}>{this.state.moyrsn[key]['count']}</td>    
+        <tbody>
+          <tr className={oc_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'orangeLink' : 
+                  ny_memb.indexOf(this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() ) !== -1 ? 'redLink' : 
+                  (this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'andy' || 
+                    this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravoandy' || 
+                    this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravotv' || 
+                    this.state.moyrsn[key]['mo-yr'].split('-')[2].toLowerCase() == 'bravowwhl') ? 'purpleLink' : 'blueLink'}>
+            <td>{monthNames[this.state.moyrsn[key]['mo-yr'].split('-')[0]]}</td>
+            <td>{this.state.moyrsn[key]['mo-yr'].split('-')[1]}</td>
+            <td className='handleLink'><a href={"https://twitter.com/" + this.state.moyrsn[key]['mo-yr'].split('-')[2]} >{this.state.moyrsn[key]['mo-yr'].split('-')[2]}</a></td>
+            <td onClick={this.handleTweetShow} id={key}>{this.state.moyrsn[key]['count']}</td>    
               {this.state.showTweets[key] ? <Child tweetText={this.state.moyrsn[key]}/> : null}
-            
-          
-        </tr>
+          </tr>
+        </tbody>
         
       )
 
     const tsSnTab = Object.keys(twtSn).map(key => 
-        <tr className={oc_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'orangeLink' : 
-                            ny_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'redLink' : 
-                            (twtSn[key]['screen_name'].toLowerCase()  == 'andy' ||
-                            twtSn[key]['screen_name'].toLowerCase()  == 'bravoandy' ||
-                            twtSn[key]['screen_name'].toLowerCase()  == 'bravotv' ||
-              twtSn[key]['screen_name'].toLowerCase()  == 'bravowwhl')
-                             ? 'purpleLink' : 'blueLink'}>
-          <td ><a  href={"https://twitter.com/" + twtSn[key]['screen_name']} >{twtSn[key]['screen_name']}</a></td>
-          
-            <td onClick={this.handleTweetShow} id={key}>{twtSn[key]['count']}</td>
-            {this.state.showTweets[key] ? <Child tweetText={twtSn[key]}/> : null}
-        </tr>
+        <tbody>
+          <tr className={oc_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'orangeLink' : 
+                              ny_memb.indexOf(twtSn[key]['screen_name'].toLowerCase() ) !== -1 ? 'redLink' : 
+                              (twtSn[key]['screen_name'].toLowerCase()  == 'andy' ||
+                              twtSn[key]['screen_name'].toLowerCase()  == 'bravoandy' ||
+                              twtSn[key]['screen_name'].toLowerCase()  == 'bravotv' ||
+                twtSn[key]['screen_name'].toLowerCase()  == 'bravowwhl')
+                               ? 'purpleLink' : 'blueLink'}>
+            <td ><a  href={"https://twitter.com/" + twtSn[key]['screen_name']} >{twtSn[key]['screen_name']}</a></td>
+            
+              <td onClick={this.handleTweetShow} id={key}>{twtSn[key]['count']}</td>
+              {this.state.showTweets[key] ? <Child tweetText={twtSn[key]}/> : null}
+          </tr>
+        </tbody>
       )
 
     return (
@@ -257,15 +256,15 @@ class FranWrap extends Component {
             <Navbar>
               <Navbar.Header>
                 <Navbar.Brand>
-                  <Link to="/">Home</Link>
+                  <Link onClick={this.firstLoad} to="/">Home</Link>
                 </Navbar.Brand>
               </Navbar.Header>
               <Nav>
                   <NavItem>
-                    <Link onClick={this.firstLoad} id='oc' className={this.state.selCity=='ocSel' ? 'ocSel' : 'oSel'} to="/oc">Orange County</Link>
+                    <Link onClick={this.firstLoad} id='oc' className={this.state.selCity=='ocSel' ? 'citySel' : 'oSel'} to="/oc">Orange County</Link>
                   </NavItem>
                   <NavItem>
-                    <Link onClick={this.firstLoad} id='ny'  className={this.state.selCity=='nySel' ? 'nySel' : 'oSel'}  to="/ny">NY</Link>
+                    <Link onClick={this.firstLoad} id='ny'  className={this.state.selCity=='nySel' ? 'citySel' : 'oSel'}  to="/ny">NY</Link>
                   </NavItem>
 
                 </Nav>
